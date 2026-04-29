@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCheckbox } f
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface Tarefa {
+type Tarefa = {
   id: number;
   titulo: string;
   concluida: boolean;

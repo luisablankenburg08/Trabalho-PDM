@@ -3,14 +3,14 @@ import { IonButton, IonToolbar, IonContent, IonHeader, IonTitle } from "@ionic/a
 import { CommonModule } from "@angular/common";
 import { App } from '@capacitor/app';
 
-interface Produto {
+type Produto = {
   id: number;
   nome: string;
   preco: number;
   estoque: number;
 }
 
-interface Tarefa {
+type Tarefa = {
   id: number;
   titulo: string;
   concluida: boolean;
@@ -48,17 +48,12 @@ export class DesafioComponent {
     tarefasFiltradas: Tarefa[] = [];
     contagemTarefas: { baixa: number; media: number; alta: number } = { baixa: 0, media: 0, alta: 0 };
     
-
-    
     mostrarProdutos: boolean = false;
     mostrarEstoque: boolean = false;
     mostrarTarefas: boolean = false;
     mostrarFiltroTarefas: boolean = false;
     mostrarResultadoFiltro: boolean = false;
     mostrarContagem: boolean = false;
-    mostrarCadastro: boolean = false;
-    mostrarConcluir: boolean = false;
-    mostrarOrdenar: boolean = false;
 
     constructor() { }
 

@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLa
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface Produto {
+type Produto = {
   nome: string;
   preco: number;
   estoque: number;
@@ -14,7 +14,7 @@ interface Produto {
   templateUrl: './cadastrar-produtos.page.html',
   styleUrls: ['./cadastrar-produtos.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, CommonModule, FormsModule]
 })
 export class CadastrarProdutosPage {
 
@@ -28,6 +28,4 @@ export class CadastrarProdutosPage {
   voltar() {
     window.location.href = '/home';
   }
-
-
 }
