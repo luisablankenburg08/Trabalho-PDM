@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Filtrar Tarefas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <fieldset *ngIf="mostrarFiltro">
+    <legend>Filtrar Tarefas</legend>
+    <ion-button (click)="filtrarTarefas(true)">Tarefas Concluídas</ion-button>
+    <ion-button (click)="filtrarTarefas(false)">Tarefas Pendentes</ion-button>
+  </fieldset>
+
+  <fieldset *ngIf="!mostrarFiltro">
+    <legend>Resultado do Filtro</legend>
+    <div *ngFor="let tarefa of tarefasFiltradas" class="resultado">
+      <p><strong>Titulo:</strong> {{ tarefa.titulo }}</p>
+      <p><strong>Concluída:</strong> {{ tarefa.concluida ? 'Sim' : 'Não' }}</p>
+      <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+      <p><strong>Data de Criação:</strong> {{ tarefa.dataCriacao }}</p>
+      <hr>
+    </div>
+    <ion-button (click)="mostrarFiltro = true" color="warning">Novo Filtro</ion-button>
+  </fieldset>
+
+  <ion-button (click)="voltar()" color="danger">Voltar</ion-button>
+</ion-content>

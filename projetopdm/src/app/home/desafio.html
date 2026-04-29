@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Controle de Produtos e Tarefas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <!-- MENU DE INTERAÇÃO-->
+
+  <h2>MENU DE INTERAÇÃO</h2>
+  <fieldset>
+    <ul>
+      <li><ion-button (click)="listarProdutos()">Listar Produtos</ion-button></li>
+      <li><ion-button (click)="calcularTotalEstoque()">Valor do Estoque</ion-button></li>
+      <li><ion-button (click)="listarTarefas()">Listar Tarefas</ion-button></li>
+      <li><ion-button (click)="filtrarTarefas()">Filtrar Tarefas</ion-button></li>
+      <li><ion-button (click)="contagemPorPrioridade()">Contagem de Tarefas por Prioridade</ion-button></li>
+      <li><ion-button (click)="exitApp()">Sair</ion-button></li>
+    </ul>
+  </fieldset>
+
+
+  <!-- FUNCIONALIDADES-->
+
+  <h2>FUNCIONALIDADES</h2>
+  <fieldset>
+    <ul>
+      <li><ion-button (click)="cadastrarProdutos()">Cadastrar Produtos</ion-button></li>
+      <li><ion-button (click)="concluirTarefas()">Concluir Tarefas</ion-button></li>
+      <li><ion-button (click)="ordenarTarefas()">Ordenar Tarefas</ion-button></li>
+    </ul>
+  </fieldset>
+
+</ion-content>
+

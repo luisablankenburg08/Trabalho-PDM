@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Valor do Estoque</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <fieldset>
+    <legend>Valor Total do Estoque</legend>
+    <p><strong>Total:</strong> {{ formatarPreco(totalEstoque) }}</p>
+    <ion-button (click)="voltar()" color="danger">Voltar</ion-button>
+  </fieldset>
+</ion-content>
