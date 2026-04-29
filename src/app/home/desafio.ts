@@ -44,13 +44,12 @@ export class DesafioComponent {
         { id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(2025, 4, 3, 14, 0, 0) }
     ];
 
-    // Propriedades para resultados do MENU DE INTERAÇÃO
     totalEstoque: number = 0;
     tarefasFiltradas: Tarefa[] = [];
     contagemTarefas: { baixa: number; media: number; alta: number } = { baixa: 0, media: 0, alta: 0 };
-    tarefasOrdenadas: Tarefa[] = [];
+    
 
-    // Propriedades para controlar visibilidade dos resultados
+    
     mostrarProdutos: boolean = false;
     mostrarEstoque: boolean = false;
     mostrarTarefas: boolean = false;
@@ -63,10 +62,9 @@ export class DesafioComponent {
 
     constructor() { }
 
-    // MENU DE INTERAÇÃO
+    // MENU 
     listarProdutos() {
         this.mostrarProdutos = true;
-        this.limparOutrosResultados('produtos');
     }
 
     calcularTotalEstoque() {
@@ -75,21 +73,18 @@ export class DesafioComponent {
             this.totalEstoque += produto.preco * produto.estoque;
         }
         this.mostrarEstoque = true;
-        this.limparOutrosResultados('estoque');
     }
 
     listarTarefas() {
         this.mostrarTarefas = true;
-        this.limparOutrosResultados('tarefas');
     }
 
     filtrarTarefas() {
         this.mostrarFiltroTarefas = true;
         this.mostrarResultadoFiltro = false;
-        this.limparOutrosResultados('filtro');
     }
 
-    filtrarTarefasComStatus(concluida: boolean) {
+    escolhafiltrarTarefas(concluida: boolean) {
         this.tarefasFiltradas = this.tarefas.filter(tarefa => tarefa.concluida === concluida);
         this.mostrarFiltroTarefas = false;
         this.mostrarResultadoFiltro = true;
@@ -106,39 +101,19 @@ export class DesafioComponent {
             this.contagemTarefas[tarefa.prioridade]++;
         }
         this.mostrarContagem = true;
-        this.limparOutrosResultados('contagem');
-    }
-
-    limparOutrosResultados(tipo: string) {
-        if (tipo !== 'produtos') this.mostrarProdutos = false;
-        if (tipo !== 'estoque') this.mostrarEstoque = false;
-        if (tipo !== 'tarefas') this.mostrarTarefas = false;
-        if (tipo !== 'filtro' && tipo !== 'resultadoFiltro') {
-            this.mostrarFiltroTarefas = false;
-            this.mostrarResultadoFiltro = false;
-        }
-        if (tipo !== 'contagem') this.mostrarContagem = false;
-        if (tipo !== 'cadastro') this.mostrarCadastro = false;
-        if (tipo !== 'concluir') this.mostrarConcluir = false;
-        if (tipo !== 'ordenar') this.mostrarOrdenar = false;
     }
 
     // FUNCIONALIDADES
     cadastrarProdutos() {
-        this.mostrarCadastro = true;
-        this.limparOutrosResultados('cadastro');
+        window.location.href = '/cadastrar-produtos'; 
     }
 
     concluirTarefas() {
-        this.mostrarConcluir = true;
-        this.limparOutrosResultados('concluir');
+        window.location.href = '/concluir-tarefas'; 
     }
 
     ordenarTarefas() {
-        const prioridadeOrdem: { [key in "alta" | "media" | "baixa"]: number } = { alta: 1, media: 2, baixa: 3 };
-        this.tarefasOrdenadas = [...this.tarefas].sort((a, b) => prioridadeOrdem[a.prioridade] - prioridadeOrdem[b.prioridade]);
-        this.mostrarOrdenar = true;
-        this.limparOutrosResultados('ordenar');
+        window.location.href = '/ordenar-tarefas';
     }
 
     exitApp() {

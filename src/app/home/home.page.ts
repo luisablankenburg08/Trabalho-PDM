@@ -1,6 +1,5 @@
 
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { DesafioComponent } from './desafio';
 
@@ -10,11 +9,7 @@ import { DesafioComponent } from './desafio';
   styleUrls: ['home.page.scss'],
   imports: [
     CommonModule,
-    DesafioComponent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent
+    DesafioComponent
   ],
 })
 export class HomePage {

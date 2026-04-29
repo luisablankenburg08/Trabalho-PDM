@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCheckbox } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DataService, Tarefa } from '../../services/data.service';
+
+interface Tarefa {
+  id: number;
+  titulo: string;
+  concluida: boolean;
+  prioridade: "baixa" | "media" | "alta";
+  dataCriacao: Date;
+}
 
 @Component({
   selector: 'app-concluir-tarefas',
@@ -11,18 +18,20 @@ import { DataService, Tarefa } from '../../services/data.service';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCheckbox, CommonModule, FormsModule]
 })
-export class ConcluirTarefasPage implements OnInit {
-
-  tarefas: Tarefa[] = [];
-
-  constructor(private dataService: DataService) { }
-
-  ngOnInit() {
-    this.tarefas = this.dataService.getTarefas();
-  }
+export class ConcluirTarefasPage {
+  tarefas: Tarefa[] = [
+    { id: 1, titulo: "Reposição de verduras", concluida: true, prioridade: "alta", dataCriacao: new Date(2025, 5, 5, 15, 0, 0) },
+    { id: 2, titulo: "Limpeza dos corredores", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 5, 5, 7, 0, 0) },
+    { id: 3, titulo: "Organizar a folha de pagamento", concluida: false, prioridade: "alta", dataCriacao: new Date(2025, 4, 5, 16, 30, 0) },
+    { id: 4, titulo: "Averiguar novas mercadorias", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 2, 5, 10, 30, 0) },
+    { id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(2025, 4, 3, 14, 0, 0) }
+  ];
 
   concluirTarefa(id: number) {
-    this.dataService.concluirTarefa(id);
+    const tarefa = this.tarefas.find(t => t.id === id);
+    if (tarefa) {
+      tarefa.concluida = !tarefa.concluida;
+    }
   }
 
   voltar() {

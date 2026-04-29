@@ -1,44 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel,IonItem } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DataService, Produto } from '../../services/data.service';
+
+interface Produto {
+  nome: string;
+  preco: number;
+  estoque: number;
+}
 
 @Component({
   selector: 'app-cadastrar-produtos',
   templateUrl: './cadastrar-produtos.page.html',
   styleUrls: ['./cadastrar-produtos.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, CommonModule, FormsModule]
 })
-export class CadastrarProdutosPage implements OnInit {
+export class CadastrarProdutosPage {
 
-  novoProduto: Produto = { id: 0, nome: '', preco: 0, estoque: 0 };
-  mensagem: string = '';
-
-  constructor(private dataService: DataService) { }
-
-  ngOnInit() {
-  }
+  novoProduto: Produto = { nome: '', preco: 0, estoque: 0 };
 
   cadastrar() {
-    if (this.novoProduto.nome && this.novoProduto.preco > 0 && this.novoProduto.estoque >= 0) {
-      this.novoProduto.id = Date.now();
-      this.dataService.cadastrarProduto(this.novoProduto);
-      this.mensagem = `Produto "${this.novoProduto.nome}" cadastrado com sucesso!`;
-      this.novoProduto = { id: 0, nome: '', preco: 0, estoque: 0 };
-      setTimeout(() => this.mensagem = '', 3000);
-    } else {
-      this.mensagem = 'Preencha todos os campos corretamente!';
-    }
+    if (this.novoProduto.nome && this.novoProduto.preco > 0 && this.novoProduto.estoque > 0) {
+      this.novoProduto = { nome: '', preco: 0, estoque: 0 };
+    } 
   }
-
   voltar() {
     window.location.href = '/home';
   }
 
-  formatarPreco(preco: number): string {
-    return "R$ " + preco.toFixed(2);
-  }
 
 }
