@@ -19,6 +19,63 @@
     </ul>
   </fieldset>
 
+  <!-- RESULTADOS DO MENU DE INTERAÇÃO -->
+
+  <!-- Resultado: Listar Produtos -->
+  <fieldset *ngIf="mostrarProdutos">
+    <legend>Produtos</legend>
+    <div *ngFor="let produto of produtos" class="resultado">
+      <p><strong>Nome:</strong> {{ produto.nome }}</p>
+      <p><strong>Preço:</strong> R$ {{ produto.preco | number: '1.2-2' }}</p>
+      <p><strong>Estoque:</strong> {{ produto.estoque }}</p>
+      <hr>
+    </div>
+  </fieldset>
+
+  <!-- Resultado: Valor do Estoque -->
+  <fieldset *ngIf="mostrarEstoque">
+    <legend>Valor Total do Estoque</legend>
+    <p><strong>Total:</strong> R$ {{ totalEstoque | number: '1.2-2' }}</p>
+  </fieldset>
+
+  <!-- Resultado: Listar Tarefas -->
+  <fieldset *ngIf="mostrarTarefas">
+    <legend>Tarefas</legend>
+    <div *ngFor="let tarefa of tarefas" class="resultado">
+      <p><strong>Titulo:</strong> {{ tarefa.titulo }}</p>
+      <p><strong>Concluída:</strong> {{ tarefa.concluida ? 'Sim' : 'Não' }}</p>
+      <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+      <p><strong>Data de Criação:</strong> {{ tarefa.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <hr>
+    </div>
+  </fieldset>
+
+  <!-- Resultado: Filtrar Tarefas -->
+  <fieldset *ngIf="mostrarFiltroTarefas">
+    <legend>Filtrar Tarefas</legend>
+    <ion-button (click)="filtrarTarefasComStatus(true)">Tarefas Concluídas</ion-button>
+    <ion-button (click)="filtrarTarefasComStatus(false)">Tarefas Pendentes</ion-button>
+  </fieldset>
+
+  <fieldset *ngIf="mostrarResultadoFiltro">
+    <legend>Resultado do Filtro</legend>
+    <div *ngFor="let tarefa of tarefasFiltradas" class="resultado">
+      <p><strong>Titulo:</strong> {{ tarefa.titulo }}</p>
+      <p><strong>Concluída:</strong> {{ tarefa.concluida ? 'Sim' : 'Não' }}</p>
+      <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+      <p><strong>Data de Criação:</strong> {{ tarefa.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <hr>
+    </div>
+    <ion-button (click)="novoFiltro()" color="warning">Novo Filtro</ion-button>
+  </fieldset>
+
+  <!-- Resultado: Contagem por Prioridade -->
+  <fieldset *ngIf="mostrarContagem">
+    <legend>Contagem de Tarefas por Prioridade</legend>
+    <p><strong>Alta Prioridade:</strong> {{ contagemTarefas.alta }}</p>
+    <p><strong>Média Prioridade:</strong> {{ contagemTarefas.media }}</p>
+    <p><strong>Baixa Prioridade:</strong> {{ contagemTarefas.baixa }}</p>
+  </fieldset>
 
   <!-- FUNCIONALIDADES-->
 
@@ -29,6 +86,42 @@
       <li><ion-button (click)="concluirTarefas()">Concluir Tarefas</ion-button></li>
       <li><ion-button (click)="ordenarTarefas()">Ordenar Tarefas</ion-button></li>
     </ul>
+  </fieldset>
+
+  <!-- RESULTADOS DAS FUNCIONALIDADES -->
+
+  <!-- Resultado: Cadastrar Produtos -->
+  <fieldset *ngIf="mostrarCadastro">
+    <legend>Cadastrar Novo Produto</legend>
+    <p><em>Funcionalidade de cadastro de produtos</em></p>
+  </fieldset>
+
+  <!-- Resultado: Concluir Tarefas -->
+  <fieldset *ngIf="mostrarConcluir">
+    <legend>Concluir Tarefas</legend>
+    <div *ngFor="let tarefa of tarefas" class="resultado">
+      <p>
+        <label>
+          <input type="checkbox" [checked]="tarefa.concluida" (change)="tarefa.concluida = !tarefa.concluida">
+          <strong>{{ tarefa.titulo }}</strong>
+        </label>
+      </p>
+      <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+      <p><strong>Status:</strong> {{ tarefa.concluida ? 'Concluída' : 'Pendente' }}</p>
+      <hr>
+    </div>
+  </fieldset>
+
+  <!-- Resultado: Ordenar Tarefas -->
+  <fieldset *ngIf="mostrarOrdenar">
+    <legend>Tarefas Ordenadas por Prioridade</legend>
+    <div *ngFor="let tarefa of tarefasOrdenadas" class="resultado">
+      <p><strong>Titulo:</strong> {{ tarefa.titulo }}</p>
+      <p><strong>Prioridade:</strong> {{ tarefa.prioridade }}</p>
+      <p><strong>Concluída:</strong> {{ tarefa.concluida ? 'Sim' : 'Não' }}</p>
+      <p><strong>Data de Criação:</strong> {{ tarefa.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}</p>
+      <hr>
+    </div>
   </fieldset>
 
 </ion-content>
