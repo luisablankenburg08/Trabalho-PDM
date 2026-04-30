@@ -12,7 +12,7 @@ import { Tarefa} from '../desafio';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCheckbox, CommonModule, FormsModule]
 })
 export class ConcluirTarefasPage {
-tarefas: Tarefa[] =JSON.parse(localStorage.getItem('tarefas') || '[]');
+tarefas: Tarefa[] =JSON.parse(sessionStorage.getItem('tarefas') || '[]');
 
   concluirTarefa(id: number) {
     const tarefa = this.tarefas.find(t => t.id === id);

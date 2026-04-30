@@ -21,13 +21,7 @@ export type Tarefa = {
 
 export let produtos: Produto[];
 
-export let tarefas: Tarefa[] = [
-        { id: 1, titulo: "Reposição de verduras", concluida: true, prioridade: "alta", dataCriacao: new Date(2025, 5, 5, 15, 0, 0) },
-        { id: 2, titulo: "Limpeza dos corredores", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 5, 5, 7, 0, 0) },
-        { id: 3, titulo: "Organizar a folha de pagamento", concluida: false, prioridade: "alta", dataCriacao: new Date(2025, 4, 5, 16, 30, 0) },
-        { id: 4, titulo: "Averiguar novas mercadorias", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 2, 5, 10, 30, 0) },
-        { id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(2025, 4, 3, 14, 0, 0) }
-    ];
+export let tarefas: Tarefa[];
 
 @Component({
   selector: 'app-desafio',
@@ -39,14 +33,14 @@ export let tarefas: Tarefa[] = [
 
 export class DesafioComponent {
     produtos: Produto[] = [];
+    tarefas: Tarefa[] = [];
+
     constructor() { 
     }
-
     ngOnInit() {
         this.carregarprodutos();
+        this.carregartarefas();
         console.log(this.produtos);
-    
-    
     }
 
     carregarprodutos(){
@@ -62,10 +56,22 @@ export class DesafioComponent {
 
             sessionStorage.setItem('produtos', JSON.stringify(this.produtos));
         }
-
     }
 
-    tarefas: Tarefa[] = [];
+    carregartarefas(){
+            this.tarefas = JSON.parse(sessionStorage.getItem('tarefas') || '[]');
+
+             if(this.tarefas.length == 0){
+                this.tarefas.push({ id: 1, titulo: "Reposição de verduras", concluida: true, prioridade: "alta", dataCriacao: new Date(25, 5, 5, 15, 0, 0)});
+                this.tarefas.push({ id: 2, titulo: "Limpeza dos corredores", concluida: false, prioridade: "media", dataCriacao: new Date(25, 5, 5, 7, 0, 0)});
+                this.tarefas.push({ id: 3, titulo: "Organizar a folha de pagamento", concluida: false, prioridade: "alta", dataCriacao: new Date(25, 4, 5, 16, 30, 0)});
+                this.tarefas.push({ id: 4, titulo: "Averiguar novas mercadorias", concluida: false, prioridade: "media", dataCriacao:new Date(25, 2, 5, 10, 30, 0)});
+                this.tarefas.push({ id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(25, 4, 3, 14, 0, 0)});
+             
+                sessionStorage.setItem('tarefas', JSON.stringify(this.tarefas));
+            }
+
+        }
 
     totalEstoque: number = 0;
     tarefasFiltradas: Tarefa[] = [];
@@ -93,10 +99,12 @@ export class DesafioComponent {
     }
 
     listarTarefas() {
+        this.carregartarefas();
         this.mostrarTarefas = true;
     }
 
     filtrarTarefas() {
+        this.carregartarefas();
         this.mostrarFiltroTarefas = true;
         this.mostrarResultadoFiltro = false;
     }
@@ -113,6 +121,7 @@ export class DesafioComponent {
     }
 
     contagemPorPrioridade() {
+        this.carregartarefas();
         this.contagemTarefas = { baixa: 0, media: 0, alta: 0 };
         for (const tarefa of this.tarefas) {
             this.contagemTarefas[tarefa.prioridade]++;
