@@ -3,20 +3,28 @@ import { IonButton, IonToolbar, IonContent, IonHeader, IonTitle } from "@ionic/a
 import { CommonModule } from "@angular/common";
 import { App } from '@capacitor/app';
 
-type Produto = {
+export type Produto = {
   id: number;
   nome: string;
   preco: number;
   estoque: number;
 }
 
-type Tarefa = {
+export type Tarefa = {
   id: number;
   titulo: string;
   concluida: boolean;
   prioridade: "baixa" | "media" | "alta";
   dataCriacao: Date;
 }
+
+export const produtos: Produto[] = [
+    { id: 1, nome: "Pão Francês", preco: 9.00, estoque: 20 },
+    { id: 2, nome: "Queijo Mussarela", preco: 6.99, estoque: 50 },
+    { id: 3, nome: "Tomate", preco: 3.00, estoque: 40 },
+    { id: 4, nome: "Feijão", preco: 4.00, estoque: 60 },
+    { id: 5, nome: "Sabão Líquido", preco: 20.00, estoque: 15 }
+];
 
 @Component({
   selector: 'app-desafio',
