@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import {Tarefa,tarefas} from '../desafio';
 
-interface Tarefa {
-  id: number;
-  titulo: string;
-  concluida: boolean;
-  prioridade: "baixa" | "media" | "alta";
-  dataCriacao: Date;
-}
 
 @Component({
   selector: 'app-ordenar-tarefas',
@@ -17,18 +11,13 @@ interface Tarefa {
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonButton, CommonModule]
 })
-export class OrdenarTarefasPage implements OnInit {
-  tarefas: Tarefa[] = [
-    { id: 1, titulo: "Reposição de verduras", concluida: true, prioridade: "alta", dataCriacao: new Date(2025, 5, 5, 15, 0, 0) },
-    { id: 2, titulo: "Limpeza dos corredores", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 5, 5, 7, 0, 0) },
-    { id: 3, titulo: "Organizar a folha de pagamento", concluida: false, prioridade: "alta", dataCriacao: new Date(2025, 4, 5, 16, 30, 0) },
-    { id: 4, titulo: "Averiguar novas mercadorias", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 2, 5, 10, 30, 0) },
-    { id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(2025, 4, 3, 14, 0, 0) }
-  ];
-
+export class OrdenarTarefasPage {
+  tarefas = tarefas;
   ngOnInit() {
-    const prioridadeOrdem: { [key in "alta" | "media" | "baixa"]: number } = { alta: 1, media: 2, baixa: 3 };
-    this.tarefas.sort((a, b) => prioridadeOrdem[a.prioridade] - prioridadeOrdem[b.prioridade]);
+  const altas = this.tarefas.filter(t => t.prioridade === "alta");
+  const medias = this.tarefas.filter(t => t.prioridade === "media");
+  const baixas = this.tarefas.filter(t => t.prioridade === "baixa");
+  return altas.concat(medias, baixas);
   }
 
   voltar() {

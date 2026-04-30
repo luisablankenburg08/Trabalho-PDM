@@ -3,6 +3,7 @@ import { IonButton, IonToolbar, IonContent, IonHeader, IonTitle } from "@ionic/a
 import { CommonModule } from "@angular/common";
 import { App } from '@capacitor/app';
 
+
 export type Produto = {
   id: number;
   nome: string;
@@ -18,13 +19,15 @@ export type Tarefa = {
   dataCriacao: Date;
 }
 
-export const produtos: Produto[] = [
-    { id: 1, nome: "Pão Francês", preco: 9.00, estoque: 20 },
-    { id: 2, nome: "Queijo Mussarela", preco: 6.99, estoque: 50 },
-    { id: 3, nome: "Tomate", preco: 3.00, estoque: 40 },
-    { id: 4, nome: "Feijão", preco: 4.00, estoque: 60 },
-    { id: 5, nome: "Sabão Líquido", preco: 20.00, estoque: 15 }
-];
+export let produtos: Produto[];
+
+export let tarefas: Tarefa[] = [
+        { id: 1, titulo: "Reposição de verduras", concluida: true, prioridade: "alta", dataCriacao: new Date(2025, 5, 5, 15, 0, 0) },
+        { id: 2, titulo: "Limpeza dos corredores", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 5, 5, 7, 0, 0) },
+        { id: 3, titulo: "Organizar a folha de pagamento", concluida: false, prioridade: "alta", dataCriacao: new Date(2025, 4, 5, 16, 30, 0) },
+        { id: 4, titulo: "Averiguar novas mercadorias", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 2, 5, 10, 30, 0) },
+        { id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(2025, 4, 3, 14, 0, 0) }
+    ];
 
 @Component({
   selector: 'app-desafio',
@@ -33,24 +36,36 @@ export const produtos: Produto[] = [
   standalone: true,
   imports: [CommonModule, IonButton, IonHeader, IonToolbar, IonTitle, IonContent]
 })
+
 export class DesafioComponent {
+    produtos: Produto[] = [];
+    constructor() { 
+    }
 
-    // Dados
-    produtos: Produto[] = [
-        { id: 1, nome: "Pão Francês", preco: 9.00, estoque: 20 },
-        { id: 2, nome: "Queijo Mussarela", preco: 6.99, estoque: 50 },
-        { id: 3, nome: "Tomate", preco: 3.00, estoque: 40 },
-        { id: 4, nome: "Feijão", preco: 4.00, estoque: 60 },
-        { id: 5, nome: "Sabão Líquido", preco: 20.00, estoque: 15 }
-    ];
+    ngOnInit() {
+        this.carregarprodutos();
+        console.log(this.produtos);
+    
+    
+    }
 
-    tarefas: Tarefa[] = [
-        { id: 1, titulo: "Reposição de verduras", concluida: true, prioridade: "alta", dataCriacao: new Date(2025, 5, 5, 15, 0, 0) },
-        { id: 2, titulo: "Limpeza dos corredores", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 5, 5, 7, 0, 0) },
-        { id: 3, titulo: "Organizar a folha de pagamento", concluida: false, prioridade: "alta", dataCriacao: new Date(2025, 4, 5, 16, 30, 0) },
-        { id: 4, titulo: "Averiguar novas mercadorias", concluida: false, prioridade: "media", dataCriacao: new Date(2025, 2, 5, 10, 30, 0) },
-        { id: 5, titulo: "Contar o valor do caixa", concluida: true, prioridade: "baixa", dataCriacao: new Date(2025, 4, 3, 14, 0, 0) }
-    ];
+    carregarprodutos(){
+        this.produtos = JSON.parse(sessionStorage.getItem('produtos') || '[]');
+
+        if(this.produtos.length == 0){
+
+            this.produtos.push({ id: 1, nome: "Pão Francês", preco: 9.00, estoque: 20 });
+            this.produtos.push({ id: 2, nome: "Queijo Mussarela", preco: 6.99, estoque: 50 });
+            this.produtos.push({ id: 3, nome: "Tomate", preco: 3.00, estoque: 40 });
+            this.produtos.push({ id: 4, nome: "Feijão", preco: 4.00, estoque: 60 });
+            this.produtos.push({ id: 5, nome: "Sabão Líquido", preco: 20.00, estoque: 15 });
+
+            sessionStorage.setItem('produtos', JSON.stringify(this.produtos));
+        }
+
+    }
+
+    tarefas: Tarefa[] = [];
 
     totalEstoque: number = 0;
     tarefasFiltradas: Tarefa[] = [];
@@ -63,7 +78,6 @@ export class DesafioComponent {
     mostrarResultadoFiltro: boolean = false;
     mostrarContagem: boolean = false;
 
-    constructor() { }
 
     // MENU 
     listarProdutos() {
