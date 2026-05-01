@@ -40,7 +40,6 @@ export class DesafioComponent {
     ngOnInit() {
         this.carregarprodutos();
         this.carregartarefas();
-        console.log(this.produtos);
     }
 
     carregarprodutos(){
@@ -142,8 +141,8 @@ export class DesafioComponent {
         window.location.href = '/ordenar-tarefas';
     }
 
-    exitApp() {
-        App.exitApp();
+    exitApp(): void {
         window.close();
+        App.exitApp();
     }
 }

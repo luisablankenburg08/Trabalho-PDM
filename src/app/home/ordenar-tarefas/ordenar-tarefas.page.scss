@@ -1,10 +1,39 @@
+ion-toolbar{
+    --background: lightpink;
+    --color: darkgreen;
+}
+
+ion-content{
+    height: 100%;
+    width: 100%;
+    --background:rgb(151, 186, 151);
+    --color: black;
+
+}
+
+ion-button{
+    --background: lightpink;
+    --color: darkgreen;
+    display: flex;
+    max-width: 30vw;
+    size: small;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+legend{
+    color:hotpink;
+    font-weight: bold
+}
+
+
 .prioridade-alta {
   color: red;
   font-weight: bold;
 }
 
 .prioridade-media {
-  color: orange;
+  color: darkorange;
   font-weight: bold;
 }
 

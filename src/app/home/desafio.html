@@ -6,19 +6,20 @@
 
 <ion-content fullscreen="true">
 
-    <h2>FUNCIONALIDADES</h2>
-
-    <ul>
-      <li><ion-button (click)="cadastrarProdutos()">Cadastrar Produtos</ion-button></li>
-      <li><ion-button (click)="concluirTarefas()">Concluir Tarefas</ion-button></li>
-      <li><ion-button (click)="ordenarTarefas()">Ordenar Tarefas</ion-button></li>
-    </ul>
+    <fieldset class="menus"> 
+      <legend>FUNCIONALIDADES</legend>
+      <ul class="funcionalidades">
+        <li><ion-button (click)="cadastrarProdutos()">Cadastrar Produtos</ion-button></li>
+        <li><ion-button (click)="concluirTarefas()">Concluir Tarefas</ion-button></li>
+        <li><ion-button (click)="ordenarTarefas()">Ordenar Tarefas</ion-button></li>
+      </ul>
+    </fieldset>
 
   <!-- MENU DE INTERAÇÃO-->
 
-  <h2>MENU DE INTERAÇÃO</h2>
-  <fieldset>
-    <ul>
+  <fieldset class="menus">
+    <legend>MENU</legend>
+    <ul class="funcionalidades">
       <li><ion-button (click)="listarProdutos()">Listar Produtos</ion-button></li>
       <li><ion-button (click)="calcularTotalEstoque()">Valor do Estoque</ion-button></li>
       <li><ion-button (click)="listarTarefas()">Listar Tarefas</ion-button></li>
@@ -29,7 +30,7 @@
   </fieldset>
 
   <!-- Listar Produtos -->
-  <fieldset *ngIf="mostrarProdutos">
+  <fieldset class="resultado" *ngIf="mostrarProdutos">
     <legend>Produtos</legend>
     <div *ngFor="let produto of produtos">
       <p><strong>Nome:</strong> {{ produto.nome }}</p>
@@ -42,14 +43,14 @@
   </fieldset>
 
   <!--  Valor do Estoque -->
-  <fieldset *ngIf="mostrarEstoque">
+  <fieldset class="resultado" *ngIf="mostrarEstoque">
     <legend>Valor Total do Estoque</legend>
     <p><strong>Total:</strong> R$ {{ totalEstoque | number: '1.2-2' }}</p>
     <ion-button (click)="mostrarEstoque = false">Fechar</ion-button>
   </fieldset>
 
   <!-- Listar Tarefas -->
-  <fieldset *ngIf="mostrarTarefas">
+  <fieldset class="resultado" *ngIf="mostrarTarefas">
     <legend>Tarefas</legend>
     <div *ngFor="let tarefa of tarefas" >
       <p><strong>Titulo:</strong> {{ tarefa.titulo }}</p>
@@ -62,7 +63,7 @@
   </fieldset>
 
   <!-- Filtrar Tarefas -->
-  <fieldset *ngIf="mostrarFiltroTarefas">
+  <fieldset class="resultado" *ngIf="mostrarFiltroTarefas">
     <legend>Filtrar Tarefas</legend>
     <ion-button (click)="escolhafiltrarTarefas(true)">Tarefas Concluídas</ion-button>
     <ion-button (click)="escolhafiltrarTarefas(false)">Tarefas Pendentes</ion-button>
@@ -70,7 +71,7 @@
     <ion-button (click)="mostrarFiltroTarefas = false">Fechar</ion-button>
   </fieldset>
 
-  <fieldset *ngIf="mostrarResultadoFiltro">
+  <fieldset class="resultado" *ngIf="mostrarResultadoFiltro">
     <legend>Resultado do Filtro</legend>
     <div *ngFor="let tarefa of tarefasFiltradas" >
       <p><strong>Titulo:</strong> {{ tarefa.titulo }}</p>
@@ -84,7 +85,7 @@
   </fieldset>
 
   <!--  Contagem por Prioridade -->
-  <fieldset *ngIf="mostrarContagem">
+  <fieldset class="resultado" *ngIf="mostrarContagem">
     <legend>Contagem de Tarefas por Prioridade</legend>
     <p><strong>Alta Prioridade:</strong> {{ contagemTarefas.alta }}</p>
     <p><strong>Média Prioridade:</strong> {{ contagemTarefas.media }}</p>
